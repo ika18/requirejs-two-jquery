@@ -4,6 +4,6 @@
   "dependencies": {
     "jquery-1.7.2": "jquery#1.7.2",
     "jquery-1.10.2": "jquery#1.10.2",
-    "requirejs": "2.0.6"
+    "requirejs": "2.1.8"
   }
 }

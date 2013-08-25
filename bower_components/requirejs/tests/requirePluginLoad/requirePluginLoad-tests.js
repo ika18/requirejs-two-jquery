@@ -15,7 +15,7 @@ define('app/test2',[], function() {
     return { name: 'test2' };
 });
 
-define('plug!app/main',["app/test", "app/test2"], function(test, test2) {
+define('plug!app/main',["!app/test", "!app/test2"], function(test, test2) {
     return {
         name: 'main',
         test: test,
@@ -36,19 +36,21 @@ require({
     },
     ["app/run"],
     function() {
-        doh.register(
-            "requirePluginLoad",
-            [
-                function requirePluginLoad(t){
-                    var main = globals.main;
+        require(["plug!app/main"], function () {
+            doh.register(
+                "requirePluginLoad",
+                [
+                    function requirePluginLoad(t){
+                        var main = globals.main;
 
-                    t.is("main", main.name);
-                    t.is("test", main.test.name);
-                    t.is("test2", main.test2.name);
-                }
-            ]
-        );
+                        t.is("main", main.name);
+                        t.is("test", main.test.name);
+                        t.is("test2", main.test2.name);
+                    }
+                ]
+            );
 
-        doh.run();
+            doh.run();
+        });
     }
 );
